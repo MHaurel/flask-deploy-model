@@ -1,10 +1,5 @@
-from copyreg import pickle
 from flask import Flask, request, render_template
 from markupsafe import escape
-
-import pickle
-
-from utils import process_X
 
 app = Flask(__name__)
 
@@ -12,16 +7,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/demo')
-def demo():
-    return render_template('demo.html')
-
-@app.route('/query-demo', methods=['POST'])
-def query_demo():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
-        model = pickle.load(open('./model.pkl', 'rb'))
-        X_sample = [request.form[x] for x in request.form]
-        print(X_sample)
-        # print(process_X(X_sample)) # ISSUE with this function
+        return 'Want to create a new user ?'
+    else:
+        return 'Want to get your current account ?'
 
-        return render_template('query_demo.html', form=request.form)
+@app.route('/<name>')
+def hello(name):
+    return render_template('hello.html', name=name)
