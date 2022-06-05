@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/demo.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
-    <title>Home</title>
+    <title>Demo</title>
 </head>
 <body>
     <main>
@@ -21,13 +21,19 @@
         </div>
 
         <div class="content">
-            <div>
-                <h2>Here is a Flask demo and generic repo for you to deploy easily your new model(s)</h2>
-                <a class="button" href="/demo">
-                    Explore now !
-                </a>
-            </div>
+            {% if form %}
+            <ul>
+            {% for x in form %}
+                <li>{{ x }} - {{ form[x] }}</li>
+            {% endfor %}
+            </ul>
+
+            {% else %}
+            <p>No form</p>
+            {% endif %}
         </div>
+
     </main>
 </body>
 </html>
+
