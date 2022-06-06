@@ -5,6 +5,10 @@
     align-items: flex-start;
 }
 
+.content ul {
+    list-style: none;
+}
+
 .prediction {
     display: flex;
     flex-direction: column;

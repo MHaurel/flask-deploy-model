@@ -10,22 +10,12 @@ def process_X(X):
     sample_dict = {}
     for x in X:
         key, value = x
+        if str(value).isdigit():
+            print(f"{value} could be int converted !")
+            value = int(value)
         sample_dict[key] = value
 
     sample = pd.DataFrame(sample_dict, index=[0])
-
-    sample = pd.DataFrame({
-        'gender': 'Male',
-        'age': 21,
-        'hypertension': 0,
-        'heart_disease': 0,
-        'ever_married': 'No',
-        'work_type': 'Never_worked',
-        'Residence_type': 'Urban',
-        'avg_glucose_level': 100,
-        'bmi': 18.4,
-        'smoking_status': 'never smoked'
-    }, index=[0])
 
     gender_cols = ['Male', 'Female', 'Other']
     ever_married_cols = ['Yes', 'No']
@@ -53,7 +43,6 @@ def process_X(X):
     df_c = pd.get_dummies(sample).reindex(columns=df.columns, fill_value=0)
 
     df_nc = pd.DataFrame()
-    print(sample.columns)
     for c in sample.columns:
         if sample[str(c)].dtype != object:
             s = pd.DataFrame({
@@ -63,15 +52,13 @@ def process_X(X):
 
 
     final_df = pd.concat([df_c, df_nc], axis=1)
-
-    print("Here the final df")
     
     return final_df
 
 def predict(sample, model):
-    prediction = -1
+    prediction = None
     try:
         prediction = model.predict(sample)
     except:
-        print("Can't predict")
+        pass
     return prediction
