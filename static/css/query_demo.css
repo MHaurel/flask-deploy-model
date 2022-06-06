@@ -1,0 +1,20 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.prediction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.prediction > p {
+    margin-top: 30px;
+    color: #98DAD9;
+    font-size: 20pt;
+    font-weight: 700;
+}

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/demo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/query_demo.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
@@ -21,16 +22,27 @@
         </div>
 
         <div class="content">
-            {% if form %}
-            <ul>
-            {% for x in form %}
-                <li>{{ x }} - {{ form[x] }}</li>
-            {% endfor %}
-            </ul>
+            <div class="form-summary">
+                {% if form %}
+                <ul>
+                {% for x in form %}
+                    <li>{{ x }} - {{ form[x] }}</li>
+                {% endfor %}
+                </ul>
 
-            {% else %}
-            <p>No form</p>
-            {% endif %}
+                {% else %}
+                <p>No form</p>
+                {% endif %}
+            </div>
+
+            <div class="prediction">
+                {% if prediction %}
+                    <h2>Are you likely to having a stroke ?</h2>
+                    <p>{{ prediction }}</p>
+                {% else %}
+                    <p>No prediction could be computed !</p>
+                {% endif %}
+            </div>
         </div>
 
     </main>

@@ -4,7 +4,7 @@ from markupsafe import escape
 
 import pickle
 
-from utils import process_X
+from utils import process_X, predict
 
 app = Flask(__name__)
 
@@ -20,8 +20,14 @@ def demo():
 def query_demo():
     if request.method == 'POST':
         model = pickle.load(open('./model.pkl', 'rb'))
-        X_sample = [request.form[x] for x in request.form]
-        print(X_sample)
-        # print(process_X(X_sample)) # ISSUE with this function
+        X_sample = [(x, request.form[x]) for x in request.form]
+        
+        # print(X_sample)
+        
+        X_sample_p = process_X(X_sample) # ISSUE with this function
 
-        return render_template('query_demo.html', form=request.form)
+        pred = predict(X_sample_p, model)
+        
+        pred_label = 'Yes' if pred == 1 else 'No'
+
+        return render_template('query_demo.html', form=request.form, prediction=pred_label)
